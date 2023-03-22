@@ -10,8 +10,8 @@ import os
   
 class Transaction():
   
-    def __init__(self):
-        self.runQuery('''CREATE TABLE IF NOT EXISTS tracker
+    def __init__(self, dbase):
+        self.runQuery('''CREATE TABLE IF NOT EXISTS dbase
                     (item INT PRIMARY KEY, amount DOUBLE, category TEXT, date TEXT, description TEXT'''),())
     
     def selectAll(self):
