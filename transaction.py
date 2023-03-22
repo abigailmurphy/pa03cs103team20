@@ -12,7 +12,7 @@ class Transaction():
   
     def __init__(self):
         self.runQuery('''CREATE TABLE IF NOT EXISTS tracker
-                    (item INT PRIMARY KEY, amount double, category TEXT, date TEXT, description TEXT'''),())
+                    (item INT PRIMARY KEY, amount DOUBLE, category TEXT, date TEXT, description TEXT'''),())
     
     def selectAll(self):
         ''' return all items in tracker as a list of dicts'''
