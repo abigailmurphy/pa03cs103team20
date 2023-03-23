@@ -9,10 +9,10 @@ def print_usage():
     print('''usage:
             tracker quit
             tracker showall categories
-            tracker add category
+            tracker add_category
             tracker modify category
             tracker show transactions
-            tracker add transaction
+            tracker add_transaction
             tracker delete transaction
             tracker summarize by_date
             tracker summarize by_month
@@ -36,8 +36,20 @@ def process_args(arglist):
         print_usage()
     elif arglist[0]=="showall categories":
         print_trackers(trackers = transaction.distinctCategories())
-    elif 
-    
+    elif arglist[0]=="add_category":
+        if len(arglist)!=1:
+            print_usage()
+        else:
+            tracker =
+    elif arglist[0]=="add_transaction":
+        if len(arglist)!=1:
+            print_usage()
+        else:
+    elif arglist[0]=="delete":
+        if len(arglist)!=2:
+            print_usage()
+        else:
+            
 
 
 
