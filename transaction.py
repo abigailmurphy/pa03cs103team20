@@ -28,7 +28,7 @@ class Transaction():
       
     def addCategory(self, item, cat):
         ''' return updated with category added '''
-        return self.runQuery("UPDATE todo SET category = cat WHERE item=(?)",(item,))
+        return self.runQuery("UPDATE tracker SET category = cat WHERE item=(?)",(item,))
 
    
     def addTransaction(self,item):
