@@ -3,7 +3,7 @@ import squlite3
 import os
 
   def toDict(t):
-    ''' t is a tuple (item, amount, category,date,description)'''
+    ''' t is a tuple (item_#, amount, category,date,description)'''
     print('t='+str(t))
     tracker = {'item':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description':t[4]}
     return tracker
@@ -12,7 +12,7 @@ class Transaction():
   
     def __init__(self, dbase):
         self.runQuery('''CREATE TABLE IF NOT EXISTS dbase
-                    (item INT PRIMARY KEY, amount DOUBLE, category TEXT, date TEXT, description TEXT'''),())
+                    (item INT PRIMARY KEY, amount DOUBLE, category TEXT, date DATE, description TEXT'''),())
     
     def selectAll(self):
         ''' return all items in tracker as a list of dicts'''
@@ -20,14 +20,22 @@ class Transaction():
 
     def selectItem(self):
         ''' return all item #'s as a list of dicts.'''
-        return self.runQuery("SELECT item,* from tracker",())
+        return self.runQuery("SELECT item from tracker",())
+   
+    def selectCategories(self):
+        ''' return all distinct categories as a list of dicts.'''
+        return self.runQuery("SELECT DISTINCT category from tracker",())
+      
+    def addCategory(self, item, cat):
+        ''' return updated with category added '''
+        return self.runQuery("UPDATE todo SET category = cat WHERE rowid=(?)",(item,))
 
    
-    def add(self,item):
+    def addTransaction(self,item):
         ''' create a tracker item and add it to the tracker table '''
-        return self.runQuery("INSERT INTO tracker VALUES(?,?,?,?,?)",(item['item'],item['amount'],item['category'],item['date'],item['description']))
+        return self.runQuery("INSERT INTO tracker VALUES(?,?,?,?,?)",(item['item'],item['amount'],item['date'],item['description']))
 
-    def delete(self,item):
+    def deleteTransaction(self,item):
         ''' delete a tracker item '''
         return self.runQuery("DELETE FROM tracker WHERE item=(?)",(item,))
 
