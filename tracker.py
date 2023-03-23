@@ -21,15 +21,23 @@ def print_usage():
             '''
             )
 
-def print_todos(tracker):
+def print_trackers(trackers):
     ''' print the tracker items '''
-    if len(tracker)==0:
+    if len(trackers)==0:
         print('no tasks to print')
         return
+    print('\n')
+
 
 def process_args(arglist):
     ''' examine args and make appropriate calls to Transaction'''
     transaction = Transaction()
+    if arglist==[]:
+        print_usage()
+    elif arglist[0]=="showall categories":
+        print_trackers(trackers = transaction.distinctCategories())
+    elif 
+    
 
 
 
