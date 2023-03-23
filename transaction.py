@@ -26,6 +26,14 @@ class Transaction():
         ''' return all distinct categories as a list of dicts.'''
         return self.runQuery("SELECT DISTINCT category from tracker",())
       
+   def byDate(self):
+        ''' return all distinct categories as a list of dicts.'''
+        return self.runQuery("SELECT item, date FROM tracker ORDER BY date",())
+      
+   def byMonth(self):
+        ''' return all distinct categories as a list of dicts.'''
+        return self.runQuery("SELECT item, date FROM tracker ORDER BY MONTH(date) DESC",())
+      
     def addCategory(self, item, cat):
         ''' return updated with category added '''
         return self.runQuery("UPDATE tracker SET category = cat WHERE item=(?)",(item,))
