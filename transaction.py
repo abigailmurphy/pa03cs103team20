@@ -22,17 +22,17 @@ class Transaction():
         ''' return all item #'s as a list of dicts.'''
         return self.runQuery("SELECT item from tracker",())
    
-    def selectCategories(self):
+    def distinctCategories(self):
         ''' return all distinct categories as a list of dicts.'''
         return self.runQuery("SELECT DISTINCT category from tracker",())
       
    def byDate(self):
         ''' return all distinct categories as a list of dicts.'''
-        return self.runQuery("SELECT item, date FROM tracker ORDER BY date",())
+        return self.runQuery("SELECT item, amount, category, date, description FROM tracker ORDER BY date",())
       
    def byMonth(self):
         ''' return all distinct categories as a list of dicts.'''
-        return self.runQuery("SELECT item, date FROM tracker ORDER BY MONTH(date) DESC",())
+        return self.runQuery("SELECT SELECT item, amount, category, date, description FROM tracker ORDER BY MONTH(date) DESC",())
       
     def addCategory(self, item, cat):
         ''' return updated with category added '''
