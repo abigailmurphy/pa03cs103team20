@@ -1,5 +1,5 @@
 
-import squlite3
+import sqlite3
 import os
 
   def toDict(t):
