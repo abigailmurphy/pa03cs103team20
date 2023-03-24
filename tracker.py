@@ -71,5 +71,5 @@ def toplevel():
         process_args(args)
         print('-'*40+'\n'*3)
 
-toplevel()
+toplevel() 
 
