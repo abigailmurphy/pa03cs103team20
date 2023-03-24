@@ -27,8 +27,13 @@ def print_trackers(trackers):
         print('no tasks to print')
         return
     print('\n')
+    print("%-10s %-10s %-10s %-30s %-10s"%('item #','amount','category','date', 'description'))
+    print('-'*40)
+    for item in trackers:
+        values = tuple(item.values()) #(item #,amount,category,date,description)
+        print("%-10s %-10s %-30s %2d"%values)
 
-
+        
 def process_args(arglist):
     ''' examine args and make appropriate calls to Transaction'''
     transaction = Transaction()
