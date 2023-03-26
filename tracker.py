@@ -1,8 +1,6 @@
-
 from transaction import Transaction
 import sys
 
-# here are some helper functions ...
 
 def print_usage():
     ''' print an explanation of how to use this command '''
@@ -27,21 +25,21 @@ def print_trackers(trackers):
         print('no tasks to print')
         return
     print('\n')
-    print("%-10s %-10s %-10s %-30s %-10s"%('item #','amount','category','date', 'description'))
+    print("%-10s %-10s %-10s %-30s %-10s"%('item_num','amount','category','date', 'description'))
     print('-'*40)
     for item in trackers:
-        values = tuple(item.values()) #(item #,amount,category,date,description)
+        values = tuple(item.values()) #(item_num,amount,category,date,description)
         print("%-10s %-10s %-30s %2d"%values)
 
         
 def process_args(arglist):
+    transaction = Transaction('tracker.db')
     ''' examine args and make appropriate calls to Transaction'''
-    transaction = Transaction()
     if arglist==[]:
         print_usage()
         
     elif arglist[0]=="showall":  #shows all the categories
-        print_trackers(trackers = transaction.distinctCategories())
+        print_trackers(trackers = transaction.distinct_categories())
         
     elif arglist[0]=="add_category":   #adds the category 
         if len(arglist)!=2:
@@ -49,45 +47,45 @@ def process_args(arglist):
         else:
             item = int(arglist[1])
             cat = arglist[2]
-            transaction.addCategory(item, cat)
+            transaction.add_category(item, cat)
     
     elif arglist[0]=="modify":  #modifys the category
         if len(arglist)!=3:
             print_usage()
         else:
-            transaction.addCategory(arglist[1], arglist[2])
+            transaction.add_category(arglist[1], arglist[2])
             
     elif arglist[0]=="show": #shows the transactions 
-        print_trackers(trackers=transaction.selectAll())
+        print_trackers(trackers=transaction.select_all())
 
     elif arglist[0]=="add_transaction":  #adds the transactions 
         if len(arglist)!= 6:
             print_usage()
         else: 
-            item = int(arglist[1])
+            item_num = int(arglist[1])
             amount = float(arglist[2])
             cat = arglist[3]
             date = arglist[4]
             desc = arglist[5]
-            transaction.addTransaction({'item': item, 'amount': amount, 'category': cat, 'date': date, 'description': desc})
+            transaction.add_transaction({'item_num': item_num, 'amount': amount, 'category': cat, 'date': date, 'description': desc})
             
     elif arglist[0]=="delete": #deletes the transaction
         if len(arglist)!=2:
             print_usage()
         else:
-            transaction.deleteTransaction(int(arglist[1]))
+            transaction.delete_transaction(int(arglist[1]))
           
     elif arglist[0]=="summarize": 
         if len(arglist)!=2:
              print_usage()
         elif arglist[1]=="by_date":   #summarize by date 
-            print_trackers(trackers = transaction.byDate())
+            print_trackers(trackers = transaction.by_date())
         elif arglist[1]=="by_month":  #summarize by month
-            print_trackers(trackers = transaction.byMonth())
-        elif arglist[1]=="by_year":   #summarize by year
-            print_trackers(trackers = transaction.byYear())
+            print_trackers(trackers = transaction.by_month())
+        # elif arglist[1]=="by_year":   #summarize by year
+        #     print_trackers(trackers = transaction.byYear())
         elif arglist[1]=="by_category": #summarize by category
-            print_trackers(trackers = transaction.distinctCategories())
+            print_trackers(trackers = transaction.distinct_categories())
         else:
             print_usage()
             
@@ -118,5 +116,5 @@ def toplevel():
         process_args(args)
         print('-'*40+'\n'*3)
 
-toplevel() 
+toplevel()
 
