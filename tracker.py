@@ -25,11 +25,11 @@ def print_trackers(trackers):
         print('no tasks to print')
         return
     print('\n')
-    print("%-10s %-10s %-10s %-30s %-10s"%('item_num','amount','category','date', 'description'))
-    print('-'*40)
+    print("%-10s %-10s %-10s %-15s %-20s"%('item_num','amount','category','date', 'description'))
+    print('-'*60)
     for item in trackers:
         values = tuple(item.values()) #(item_num,amount,category,date,description)
-        print("%-10s %-10s %-30s %2d"%values)
+        print("%-10d %-10d %-10s %-15s %-20s"%(values))
 
         
 def process_args(arglist):
