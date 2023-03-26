@@ -85,7 +85,7 @@ def process_args(arglist):
         elif arglist[1]=="by_month":  #summarize by month
             print_trackers(trackers = transaction.byMonth())
         elif arglist[1]=="by_year":   #summarize by year
-            print_trackers(trackers = transaction.byYear())
+            print_trackers(trackers = transaction.byMonthASCYear())
         elif arglist[1]=="by_category": #summarize by category
             print_trackers(trackers = transaction.distinctCategories())
         else:
