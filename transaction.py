@@ -30,7 +30,7 @@ class Transaction:
     def select_item(self):
         ''' return all item #'s as a list of dicts. ~abigailmurphy'''
         return self.run_query("SELECT item from transactions",())
-   
+    
     def distinct_categories(self):
         ''' return all distinct categories as a list of dicts.'''
         return self.run_cat_query("SELECT DISTINCT category from transactions",())
@@ -76,7 +76,7 @@ class Transaction:
         return [to_dict(t) for t in tuples]
     
     def run_cat_query(self,query,tuple):
-        ''' return all of the uncompleted tasks as a list of dicts.'''
+        ''' return all of the uncompleted tasks as a list of dicts. ~ariasmithbrandeis'''
         con= sqlite3.connect(os.getenv('HOME')+'/'+ self.dbase)
         cur = con.cursor() 
         cur.execute(query,tuple)
