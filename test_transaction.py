@@ -101,9 +101,9 @@ def test_modify_category():
 def test_add_category():
     ''' Tests add_category() method ~monicaiizuka'''
     t1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
-    t1 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
-    database.add_transaction(item1)
-    database.add_transaction(item2)
+    t2 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
+    database.add_transaction(t1)
+    database.add_transaction(t2)
     database.add_category(1, 'Groceries')
     assert database.select_all() == [t1, t2]
 
