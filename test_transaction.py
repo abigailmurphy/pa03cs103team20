@@ -13,10 +13,11 @@ def test_select_all():
 
 
 def test_select_item():
+  # Test that the select_item function returns a list of all item numbers as dictionaries
+    expected_result = [{'item_num': 1}, {'item_num': 2}, {'item_num': 3}]
+    assert Transaction(database).select_item() == expected_result
   
-  
-  
-  
+
 def test_distinct_categories():
   
   
