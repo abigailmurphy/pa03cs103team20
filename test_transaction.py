@@ -41,20 +41,34 @@ def test_distinct_categories():
   
   
 def test_by_date():
-  
-  
-  
-  
+    database.add_transaction({'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'})
+    database.add_transaction({'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'})
+    database.add_transaction({'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2022-03-27', 'description': 'Watched a movie'})
+    expected = [{'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'},
+                {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'},
+                {'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2022-03-27', 'description': 'Watched a movie'}]
+    assert database.by_date() == expected
   
 def test_by_month():
-  
-  
+    database.add_transaction({'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'})
+    database.add_transaction({'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-01-26', 'description': 'Filled up gas'})
+    database.add_transaction({'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2022-09-27', 'description': 'Watched a movie'})
+    expected = [{'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-01-26', 'description': 'Filled up gas'},
+                {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'},
+                {'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2022-09-27', 'description': 'Watched a movie'}]
+    assert database.by_date() == expected
   
   
 def test_by_month_asc_year():
+    database.add_transaction({'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2019-03-25', 'description': 'Bought groceries'})
+    database.add_transaction({'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-01-26', 'description': 'Filled up gas'})
+    database.add_transaction({'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2003-09-27', 'description': 'Watched a movie'})
+    expected = [{'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2003-09-27', 'description': 'Watched a movie'},
+                {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2019-03-25', 'description': 'Bought groceries'},
+                {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-01-26', 'description': 'Filled up gas'})
+    assert database.by_date() == expected
   
-  
-  
+
 def test_modify_category():
     t1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
     t2 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
