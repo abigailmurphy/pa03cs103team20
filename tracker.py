@@ -22,7 +22,7 @@ def print_usage():
 def print_trackers(trackers):
     ''' print the tracker items '''
     if len(trackers)==0:
-        print('no tasks to print')
+        print('no records to print')
         return
     print('\n')
     print("%-10s %-10s %-10s %-15s %-20s"%('item_num','amount','category','date', 'description'))
@@ -31,6 +31,17 @@ def print_trackers(trackers):
         values = tuple(item.values()) #(item_num,amount,category,date,description)
         print("%-10d %-10d %-10s %-15s %-20s"%(values))
 
+def print_category_trackers(trackers):
+    ''' print the summary tracker items '''
+    if len(trackers)==0:
+        print('no tasks to print')
+        return
+    print('\n')
+    print("%-10s"%('category'))
+    print('-'*20)
+    for item in trackers:
+        values = tuple(item.values()) #(category)
+        print("%-10s"%(values[0]))
         
 def process_args(arglist):
     transaction = Transaction('tracker.db')
@@ -39,7 +50,7 @@ def process_args(arglist):
         print_usage()
         
     elif arglist[0]=="showall":  #shows all the categories
-        print_trackers(trackers = transaction.distinct_categories())
+        print_category_trackers(trackers = transaction.distinct_categories())
         
     elif arglist[0]=="add_category":   #adds the category 
         if len(arglist)!=2:
@@ -82,8 +93,8 @@ def process_args(arglist):
             print_trackers(trackers = transaction.by_date())
         elif arglist[1]=="by_month":  #summarize by month
             print_trackers(trackers = transaction.by_month())
-        # elif arglist[1]=="by_year":   #summarize by year
-        #     print_trackers(trackers = transaction.byYear())
+        elif arglist[1]=="by_year":   #summarize by year
+            print_trackers(trackers = transaction.by_year())
         elif arglist[1]=="by_category": #summarize by category
             print_trackers(trackers = transaction.distinct_categories())
         else:
