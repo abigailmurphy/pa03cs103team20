@@ -8,8 +8,8 @@ def database():
 def test_to_dict():
   '''Test that the to_dict function returns a dictionary with the correct keys and values ~monicaiizuka'''
     t = (1, 10.0, 'Groceries', '2022-03-25', 'Bought groceries')
-    expected_result = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
-    assert Transaction(database).to_dict(t) == expected_result
+    expected = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
+    assert database.to_dict(t) == expected
   
 def test_select_all():
 ''' Tests select_all method ~monicaiizuka'''
@@ -95,23 +95,23 @@ def test_modify_category():
     database.add_transaction(t1)
     database.add_transaction(t2)
     database.modify_category('Transportation', 'Travel')
-    assert database.select_all() == [item1, {'item_num': 2, 'amount': 20.0, 'category': 'Travel', 'date': '2022-01-02', 'description': 'Filled up gas'}]
+    assert database.select_all() == [t1, {'item_num': 2, 'amount': 20.0, 'category': 'Travel', 'date': '2022-01-02', 'description': 'Filled up gas'}]
 
   
 def test_add_category():
   ''' Tests add_category() method ~monicaiizuka'''
-    item1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
-    item2 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
-    trans.add_transaction(item1)
-    trans.add_transaction(item2)
-    trans.add_category(1, 'Groceries')
-    assert trans.select_all() == [item1, item2]
+    t1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
+    t1 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
+    database.add_transaction(item1)
+    database.add_transaction(item2)
+    database.add_category(1, 'Groceries')
+    assert database.select_all() == [t1, t2]
 
 def test_add_transaction():
   ''' Tests add_transaction() method ~monicaiizuka'''
-    cat = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
-    database.add_transaction(cat)
-    assert database.select_all() == [cat]
+    t = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
+    database.add_transaction(t)
+    assert database.select_all() == [t]
   
 def test_delete_transaction():
   ''' Tests delete_transaction() method ~monicaiizuka'''
