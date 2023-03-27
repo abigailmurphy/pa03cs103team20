@@ -2,7 +2,7 @@ import pytest
 from transaction import Transaction
 
 def database():
-    return Transaction('example')
+    return Transaction('self.dbase')
   
 def test_to_dict():
   # Test that the to_dict function returns a dictionary with the correct keys and values
