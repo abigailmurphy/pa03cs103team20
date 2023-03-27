@@ -6,8 +6,8 @@ def database():
   
 def test_to_dict():
   # Test that the to_dict function returns a dictionary with the correct keys and values
-    t = (1, 10.0, 'food', '2022-03-26', 'groceries')
-    expected_result = {'item_num': 1, 'amount': 10.0, 'category': 'food', 'date': '2022-03-26', 'description': 'groceries'}
+    t = (1, 10.0, 'Groceries', '2022-03-25', 'Bought groceries')
+    expected_result = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
     assert Transaction(database).to_dict(t) == expected_result
   
 def test_select_all():
@@ -55,7 +55,14 @@ def test_by_month_asc_year():
   
   
   
-  
+def test_modify_category():
+    t1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
+    t2 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
+    database.add_transaction(t1)
+    database.add_transaction(t2)
+    database.modify_category('Transportation', 'Travel')
+    assert database.select_all() == [item1, {'item_num': 2, 'amount': 20.0, 'category': 'Travel', 'date': '2022-01-02', 'description': 'Filled up gas'}]
+
   
 def test_add_category():
     item1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
@@ -71,8 +78,8 @@ def test_add_transaction():
     assert database.select_all() == [cat]
   
 def test_delete_transaction():
-    t1 = {'item_num': 1, 'amount': 10.0, 'category': 'food', 'date': '2022-03-25', 'description': 'Bought groceries'}
-    t2 = {'item_num': 2, 'amount': 20.0, 'category': 'transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
+    t1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
+    t2 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
     database.add_transaction(t1)
     database.add_transaction(t2)
     database.delete_transaction(1)
