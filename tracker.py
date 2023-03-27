@@ -3,7 +3,7 @@ import sys
 
 
 def print_usage():
-    ''' print an explanation of how to use this command '''
+    ''' print an explanation of how to use this command ~monicaiizuka'''
     print('''usage:
             tracker quit
             tracker showall categories  
@@ -20,7 +20,7 @@ def print_usage():
             )
 
 def print_trackers(trackers):
-    ''' print the tracker items '''
+    ''' print the tracker items ~monicaiizuka'''
     if len(trackers)==0:
         print('no records to print')
         return
@@ -32,7 +32,7 @@ def print_trackers(trackers):
         print("%-10d %-10d %-10s %-15s %-20s"%(values))
 
 def print_category_trackers(trackers):
-    ''' print the summary tracker items '''
+    ''' print the summary tracker items ~monicaiizuka'''
     if len(trackers)==0:
         print('no tasks to print')
         return
@@ -44,6 +44,7 @@ def print_category_trackers(trackers):
         print("%-10s"%(values[0]))
         
 def process_args(arglist):
+    '''~monicaiizuka'''
     transaction = Transaction('tracker.db')
     ''' examine args and make appropriate calls to Transaction'''
     if arglist==[]:
@@ -108,7 +109,7 @@ def process_args(arglist):
         
         
 def toplevel():
-    ''' read the command args and process them'''
+    ''' read the command args and process them ~monicaiizuka'''
     if len(sys.argv)==1:
         # they didn't pass any arguments, 
         # so prompt for them in a loop
