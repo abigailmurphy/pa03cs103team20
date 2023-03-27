@@ -49,7 +49,7 @@ class Transaction:
     def by_year(self):
         ''' return all distinct categories as a list of dicts.'''
         return self.run_query('''SELECT item_num, amount, category, date, description 
-                                 FROM transactions 
+                                  FROM transactions 
                                  GROUP BY STRFTIME('%Y',date) 
                                  ORDER BY date''',())
       
@@ -65,8 +65,11 @@ class Transaction:
 
     def add_transaction(self,item):
         ''' create a transactions item and add it to the transactions table ~abigailmurphy'''
-       return self.run_query('''INSERT INTO transactions 
-       VALUES(?,?,?,?,?)''',(item['item_num'],item['amount'],item['category'],item['date'],item['description']))
+       return self.run_query('''INSERT INTO transactions VALUES(?,?,?,?,?)''',(item['item_num'],
+                                                                               item['amount'],
+                                                                               item['category'],
+                                                                               item['date'],
+                                                                               item['description']))
 
     def delete_transaction(self,item_num):
         ''' delete a transactions item '~abigailmurphy'''
