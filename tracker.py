@@ -3,12 +3,12 @@ import sys
 
 
 def print_usage():
-    ''' print an explanation of how to use this command ~monicaiizuka'''
+    ''' print an explanation of how to use this command '''
     print('''usage:
             tracker quit
             tracker showall categories  
-            tracker add_category
-            tracker modify category
+            tracker add_category (item_num, new_category)
+            tracker modify category (old category, new category)
             tracker show transactions
             tracker add_transaction
             tracker delete transaction
@@ -20,7 +20,7 @@ def print_usage():
             )
 
 def print_trackers(trackers):
-    ''' print the tracker items ~monicaiizuka, ariasmithbrandeis'''
+    ''' print the tracker items  ~monica ~aria'''
     if len(trackers)==0:
         print('no records to print')
         return
@@ -32,7 +32,7 @@ def print_trackers(trackers):
         print("%-10d %-10d %-10s %-15s %-20s"%(values))
 
 def print_category_trackers(trackers):
-    ''' print the summary tracker items ~ariasmithbrandeis'''
+    ''' print the summary tracker items  ~aria'''
     if len(trackers)==0:
         print('no tasks to print')
         return
@@ -44,9 +44,8 @@ def print_category_trackers(trackers):
         print("%-10s"%(values[0]))
         
 def process_args(arglist):
-    '''~monicaiizuka'''
     transaction = Transaction('tracker.db')
-    ''' examine args and make appropriate calls to Transaction'''
+    ''' examine args and make appropriate calls to Transaction ~monica ~aria'''
     if arglist==[]:
         print_usage()
         
@@ -65,7 +64,7 @@ def process_args(arglist):
         if len(arglist)!=3:
             print_usage()
         else:
-            transaction.add_category(arglist[1], arglist[2])
+            transaction.modify_category(arglist[1], arglist[2])
             
     elif arglist[0]=="show": #shows the transactions 
         print_trackers(trackers=transaction.select_all())
@@ -109,7 +108,7 @@ def process_args(arglist):
         
         
 def toplevel():
-    ''' read the command args and process them ~monicaiizuka'''
+    ''' read the command args and process them'''
     if len(sys.argv)==1:
         # they didn't pass any arguments, 
         # so prompt for them in a loop

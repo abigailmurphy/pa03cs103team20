@@ -6,7 +6,7 @@ from transaction import Transaction, to_dict, cat_to_dict
 
 @pytest.fixture
 def tuples():
-    ''' create transaction tuples'''
+    ''' create transaction tuples ~ ariasmithbrandeis'''
     return [(1, 10, 'category1', '02/02/22', 'desc1'),
             (2, 20, 'category2', '03/03/22', 'desc3'),
             (3, 10, 'category1', '01/02/23', 'desc5'),
@@ -14,18 +14,22 @@ def tuples():
 
 @pytest.fixture
 def returned_tuples(tuples):
+    ''' ~ariasmithbrandeis'''
     return [tuples[i] for i in range(len(tuples))]
 
 @pytest.fixture
 def returned_dicts(tuples):
+    ''' ~ariasmithbrandeis'''
     return [to_dict(t) for t in tuples]
 
 @pytest.fixture
 def trans_path(tmp_path):
+    ''' ~ariasmithbrandeis'''
     yield tmp_path / 'tracker.db'
 
 @pytest.fixture(autouse=True)
 def transactions(trans_path,tuples):
+    ''' ~ariasmithbrandeis'''
     "create and initialize the todo.db database in /tmp "
     con= sqlite3.connect(trans_path)
     cur = con.cursor()
@@ -42,12 +46,14 @@ def transactions(trans_path,tuples):
     con.commit()
   
 def test_select_all(transactions, returned_dicts):
+    ''' ~ariasmithbrandeis'''
     td = transactions
     results = td.select_all()
     expected = returned_dicts
     assert results == expected
 
 def test_add_transaction(transactions, returned_dicts):
+    ''' ~ariasmithbrandeis'''
     td = transactions
     tuple = (len(returned_dicts)+1,50, 'category1', '03/14/23', 'desc9')
     transactions.add_transaction(to_dict(tuple))
@@ -55,8 +61,9 @@ def test_add_transaction(transactions, returned_dicts):
     assert results[-1] == to_dict(tuple)
   
 def test_delete_transaction(transactions,returned_dicts):
-        td = transactions
-        td.delete_transaction(1)
-        results = td.select_all()
-        expected = returned_dicts
-        assert results == expected[1:]
+    ''' ~ariasmithbrandeis'''
+    td = transactions
+    td.delete_transaction(1)
+    results = td.select_all()
+    expected = returned_dicts
+    assert results == expected[1:]
