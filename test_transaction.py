@@ -86,8 +86,3 @@ def test_delete_transaction():
     assert database.select_all() == [t2]
   
   
-def test_run_query():
-
-
-
-
