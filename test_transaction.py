@@ -58,18 +58,25 @@ def test_by_month_asc_year():
   
   
 def test_add_category():
-  
-  
-  
-  
+    item1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
+    item2 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
+    trans.add_transaction(item1)
+    trans.add_transaction(item2)
+    trans.add_category(1, 'Groceries')
+    assert trans.select_all() == [item1, item2]
+
 def test_add_transaction():
-  
-  
-  
-  
+    cat = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
+    database.add_transaction(cat)
+    assert database.select_all() == [cat]
   
 def test_delete_transaction():
-  
+    t1 = {'item_num': 1, 'amount': 10.0, 'category': 'food', 'date': '2022-03-25', 'description': 'Bought groceries'}
+    t2 = {'item_num': 2, 'amount': 20.0, 'category': 'transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
+    database.add_transaction(t1)
+    database.add_transaction(t2)
+    database.delete_transaction(1)
+    assert database.select_all() == [t2]
   
   
 def test_run_query():
