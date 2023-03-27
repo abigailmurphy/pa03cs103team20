@@ -42,9 +42,10 @@ class Transaction:
       
     def by_month(self):
         ''' return all distinct categories as a list of dicts.'''
-        return self.run_query('''SELECT item_num, amount, category, STRFTIME('%m',date) AS summarized_by, 
-                              description FROM transactions GROUP BY STRFTIME('%m',date)''',())
-      
+        return self.run_query('''SELECT item_num, amount, category, STRFTIME('%m',date) 
+                              AS summarized_by, description FROM transactions 
+                              GROUP BY STRFTIME('%m',date)''',())
+    
     def by_year(self):
         ''' return all distinct categories as a list of dicts.'''
         return self.run_query('''SELECT item_num, amount, category, date, 
