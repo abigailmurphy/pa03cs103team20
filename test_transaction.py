@@ -2,16 +2,17 @@ import pytest
 from transaction import Transaction
 
 def database():
+    '''monicaiizuka'''
     return Transaction('self.dbase')
   
 def test_to_dict():
-  '''Test that the to_dict function returns a dictionary with the correct keys and values'''
+  '''Test that the to_dict function returns a dictionary with the correct keys and values ~monicaiizuka'''
     t = (1, 10.0, 'Groceries', '2022-03-25', 'Bought groceries')
     expected_result = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
     assert Transaction(database).to_dict(t) == expected_result
   
 def test_select_all():
-  ''' Tests select_all method '''
+''' Tests select_all method ~monicaiizuka'''
     database.add_transaction({'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'})
     database.add_transaction({'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'})
     database.add_transaction({'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2022-03-27', 'description': 'Watched a movie'})
@@ -23,7 +24,7 @@ def test_select_all():
     assert database.select_all() == expected
 
 def test_select_item():
-  ''' Tests select_item() method '''
+  ''' Tests select_item() method ~monicaiizuka'''
     database.add_transaction({'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'})
     database.add_transaction({'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'})
     database.add_transaction({'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2022-03-27', 'description': 'Watched a movie'})
@@ -36,7 +37,7 @@ def test_select_item():
   
 
 def test_distinct_categories():
-  ''' Tests distinct_categories() method '''
+  ''' Tests distinct_categories() method ~monicaiizuka'''
     database.add_transaction({'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'})
     database.add_transaction({'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'})
     database.add_transaction({'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2022-03-27', 'description': 'Watched a movie'})
@@ -50,7 +51,7 @@ def test_distinct_categories():
     
  
 def test_by_date():
-  ''' Tests by_date() method '''
+  ''' Tests by_date() method ~monicaiizuka'''
     database.add_transaction({'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'})
     database.add_transaction({'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'})
     database.add_transaction({'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2022-03-27', 'description': 'Watched a movie'})
@@ -62,7 +63,7 @@ def test_by_date():
     assert database.by_date() == expected
   
 def test_by_month():
-  ''' Tests by_month() method '''
+  ''' Tests by_month() method ~monicaiizuka'''
     database.add_transaction({'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'})
     database.add_transaction({'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-01-26', 'description': 'Filled up gas'})
     database.add_transaction({'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2022-09-27', 'description': 'Watched a movie'})
@@ -75,7 +76,7 @@ def test_by_month():
   
   
 def test_by_month_asc_year():
-  ''' Tests by_month_asc_year() method'''
+  ''' Tests by_month_asc_year() method ~monicaiizuka'''
     database.add_transaction({'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2019-03-25', 'description': 'Bought groceries'})
     database.add_transaction({'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-01-26', 'description': 'Filled up gas'})
     database.add_transaction({'item_num': 3, 'amount': 30.0, 'category': 'Entertainment', 'date': '2003-09-27', 'description': 'Watched a movie'})
@@ -88,7 +89,7 @@ def test_by_month_asc_year():
   
 
 def test_modify_category():
-  ''' Tests modify_category() method '''
+  ''' Tests modify_category() method ~monicaiizuka'''
     t1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
     t2 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
     database.add_transaction(t1)
@@ -98,7 +99,7 @@ def test_modify_category():
 
   
 def test_add_category():
-  ''' Tests add_category() method '''
+  ''' Tests add_category() method ~monicaiizuka'''
     item1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
     item2 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
     trans.add_transaction(item1)
@@ -107,13 +108,13 @@ def test_add_category():
     assert trans.select_all() == [item1, item2]
 
 def test_add_transaction():
-  ''' Tests add_transaction() method '''
+  ''' Tests add_transaction() method ~monicaiizuka'''
     cat = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
     database.add_transaction(cat)
     assert database.select_all() == [cat]
   
 def test_delete_transaction():
-  ''' Tests delete_transaction() method '''
+  ''' Tests delete_transaction() method ~monicaiizuka'''
     t1 = {'item_num': 1, 'amount': 10.0, 'category': 'Groceries', 'date': '2022-03-25', 'description': 'Bought groceries'}
     t2 = {'item_num': 2, 'amount': 20.0, 'category': 'Transportation', 'date': '2022-03-26', 'description': 'Filled up gas'}
     database.add_transaction(t1)
