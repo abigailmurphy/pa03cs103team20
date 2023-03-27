@@ -20,8 +20,7 @@ class Transaction:
         '''~abigailmurphy'''
         self.dbase = database
         self.run_query('''CREATE TABLE IF NOT EXISTS transactions
-                    (item_num INT PRIMARY KEY, amount DOUBLE, 
-                    category TEXT, date DATE, description TEXT)''',() )
+                    (item_num INT PRIMARY KEY, amount DOUBLE, category TEXT, date DATE, description TEXT)''',() )
 
     def select_all(self):
         ''' return all items in tracker as a list of dicts ~abigailmurphy'''
@@ -55,13 +54,11 @@ class Transaction:
       
     def modify_category(self, old_cat, cat):
         ''' return updated with category added '''
-        return self.run_query('''UPDATE transactions SET category=(?) 
-                              WHERE category=(?)''',(cat, old_cat,))
+        return self.run_query('''UPDATE transactions SET category=(?) WHERE category=(?)''',(cat, old_cat,))
 
     def add_category(self, item_num, cat):
         ''' return updated with category added '''
-        return self.run_query('''UPDATE transactions SET category=(?) 
-                              WHERE item_num=(?)''',(cat, item_num,))
+        return self.run_query('''UPDATE transactions SET category=(?) WHERE item_num=(?)''',(cat, item_num,))
 
     def add_transaction(self,item):
         ''' create a transactions item and add it to the transactions table ~abigailmurphy'''
@@ -77,8 +74,7 @@ class Transaction:
         return self.run_query("DELETE FROM transactions WHERE item_num=(?)",(item_num,))
 
     def run_query(self,query,tuple):
-        ''' return all of the uncompleted tasks as a list of dicts. 
-        ~abigailmurphy, ariasmithbrandeis'''
+        ''' return all of the uncompleted tasks as a list of dicts. ~abigailmurphy, ariasmithbrandeis'''
         con= sqlite3.connect(os.getenv('HOME')+'/'+ self.dbase)
         cur = con.cursor() 
         cur.execute(query,tuple)
