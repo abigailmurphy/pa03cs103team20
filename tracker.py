@@ -20,7 +20,7 @@ def print_usage():
             )
 
 def print_trackers(trackers):
-    ''' print the tracker items ~monicaiizuka'''
+    ''' print the tracker items ~monicaiizuka, ariasmithbrandeis'''
     if len(trackers)==0:
         print('no records to print')
         return
@@ -32,7 +32,7 @@ def print_trackers(trackers):
         print("%-10d %-10d %-10s %-15s %-20s"%(values))
 
 def print_category_trackers(trackers):
-    ''' print the summary tracker items ~monicaiizuka'''
+    ''' print the summary tracker items ~ariasmithbrandeis'''
     if len(trackers)==0:
         print('no tasks to print')
         return
