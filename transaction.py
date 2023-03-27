@@ -37,7 +37,7 @@ class Transaction:
       
     def by_date(self):
         ''' return all distinct categories as a list of dicts.'''
-        return self.run_query('''SELECT item_num, amount, category, date, 
+        return self.run_query('''SELECT item_num, amount, category, date,
                               description FROM transactions group by date ORDER BY date''',())
       
     def by_month(self):
