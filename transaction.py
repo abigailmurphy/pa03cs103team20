@@ -77,7 +77,8 @@ class Transaction:
         return self.run_query("DELETE FROM transactions WHERE item_num=(?)",(item_num,))
 
     def run_query(self,query,tuple):
-        ''' return all of the uncompleted tasks as a list of dicts. ~abigailmurphy, ariasmithbrandeis'''
+        ''' return all of the uncompleted tasks as a list of dicts. 
+        ~abigailmurphy, ariasmithbrandeis'''
         con= sqlite3.connect(os.getenv('HOME')+'/'+ self.dbase)
         cur = con.cursor() 
         cur.execute(query,tuple)
