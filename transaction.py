@@ -48,27 +48,33 @@ class Transaction:
     
     def by_year(self):
         ''' return all distinct categories as a list of dicts.'''
-        return self.run_query('''SELECT item_num, amount, category, date, 
-                              description FROM transactions GROUP BY STRFTIME('%Y',date) ORDER BY date''',())
+        return self.run_query('''SELECT item_num, amount, category, date, description 
+                                 FROM transactions 
+                                 GROUP BY STRFTIME('%Y',date) 
+                                 ORDER BY date''',())
       
     def modify_category(self, old_cat, cat):
         ''' return updated with category added '''
-        return self.run_query("UPDATE transactions SET category=(?) WHERE category=(?)",(cat, old_cat,))
+        return self.run_query('''UPDATE transactions SET category=(?) 
+                              WHERE category=(?)''',(cat, old_cat,))
 
     def add_category(self, item_num, cat):
         ''' return updated with category added '''
-        return self.run_query("UPDATE transactions SET category=(?) WHERE item_num=(?)",(cat, item_num,))
+        return self.run_query('''UPDATE transactions SET category=(?) 
+                              WHERE item_num=(?)''',(cat, item_num,))
 
     def add_transaction(self,item):
         ''' create a transactions item and add it to the transactions table ~abigailmurphy'''
-        return self.run_query("INSERT INTO transactions VALUES(?,?,?,?,?)",(item['item_num'],item['amount'],item['category'],item['date'],item['description']))
+       return self.run_query("INSERT INTO transactions VALUES(?,?,?,?,?)"
+                             ,(item['item_num'],item['amount'],item['category'],item['date'],item['description']))
 
     def delete_transaction(self,item_num):
         ''' delete a transactions item '~abigailmurphy'''
         return self.run_query("DELETE FROM transactions WHERE item_num=(?)",(item_num,))
 
     def run_query(self,query,tuple):
-        ''' return all of the uncompleted tasks as a list of dicts. ~abigailmurphy, ariasmithbrandeis'''
+       ''' return all of the uncompleted tasks as a list of dicts. 
+       ~abigailmurphy, ariasmithbrandeis'''
         con= sqlite3.connect(os.getenv('HOME')+'/'+ self.dbase)
         cur = con.cursor() 
         cur.execute(query,tuple)
