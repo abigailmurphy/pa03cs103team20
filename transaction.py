@@ -65,7 +65,8 @@ class Transaction:
 
     def add_transaction(self,item):
         ''' create a transactions item and add it to the transactions table ~abigailmurphy'''
-        return self.run_query('''INSERT INTO transactions VALUES(?,?,?,?,?)''',(item['item_num'],item['amount'],item['category'],item['date'],item['description']))
+        return self.run_query('''INSERT INTO transactions VALUES(?,?,?,?,?)''',
+                              (item['item_num'],item['amount'],item['category'],item['date'],item['description']))
 
     def delete_transaction(self,item_num):
         ''' delete a transactions item '~abigailmurphy'''
