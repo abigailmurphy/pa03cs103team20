@@ -1,60 +1,62 @@
 import pytest
-from transaction import Transaction
+import sqlite3
+import os
+from datetime import date
+from transaction import Transaction, to_dict, cat_to_dict
 
-def test_to_dict():
-  
-  
-  
-  
-def test_select_all():
-  
+@pytest.fixture
+def tuples():
+    ''' create transaction tuples'''
+    return [(1, 10, 'category1', '02/02/22', 'desc1'),
+            (2, 20, 'category2', '03/03/22', 'desc3'),
+            (3, 10, 'category1', '01/02/23', 'desc5'),
+            (4, 40, 'category2', '03/04/23', 'desc7')]
 
+@pytest.fixture
+def returned_tuples(tuples):
+    return [tuples[i] for i in range(len(tuples))]
 
+@pytest.fixture
+def returned_dicts(tuples):
+    return [to_dict(t) for t in tuples]
 
-def test_select_item():
-  
-  
-  
-  
-def test_distinct_categories():
-  
-  
-  
-  
-def test_by_date():
-  
-  
-  
-  
-  
-def test_by_month():
-  
-  
-  
-  
-def test_by_month_asc_year():
-  
-  
-  
-  
-  
-def test_add_category():
-  
-  
-  
-  
-def test_add_transaction():
-  
-  
-  
-  
-  
-def test_delete_transaction():
-  
-  
-  
-def test_run_query():
+@pytest.fixture
+def trans_path(tmp_path):
+    yield tmp_path / 'tracker.db'
 
+@pytest.fixture(autouse=True)
+def transactions(trans_path,tuples):
+    "create and initialize the todo.db database in /tmp "
+    con= sqlite3.connect(trans_path)
+    cur = con.cursor()
+    cur.execute('''CREATE TABLE IF NOT EXISTS transactions
+                    (item_num INT PRIMARY KEY, amount DOUBLE, 
+                    category TEXT, date DATE, description TEXT)''')
+    for i in range(len(tuples)):
+        cur.execute('''insert into transactions values(?,?,?,?,?)''',tuples[i])
+    # create the transactions database
+    con.commit()
+    td = Transaction(trans_path)
+    yield td
+    cur.execute('''drop table transactions''')
+    con.commit()
+  
+def test_select_all(transactions, returned_dicts):
+    td = transactions
+    results = td.select_all()
+    expected = returned_dicts
+    assert results == expected
 
-
-
+def test_add_transaction(transactions, returned_dicts):
+    td = transactions
+    tuple = (len(returned_dicts)+1,50, 'category1', '03/14/23', 'desc9')
+    transactions.add_transaction(to_dict(tuple))
+    results = td.select_all()
+    assert results[-1] == to_dict(tuple)
+  
+def test_delete_transaction(transactions,returned_dicts):
+        td = transactions
+        td.delete_transaction(1)
+        results = td.select_all()
+        expected = returned_dicts
+        assert results == expected[1:]
