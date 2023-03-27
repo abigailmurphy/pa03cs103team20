@@ -55,7 +55,6 @@ class Transaction:
         ''' return updated with category added '''
         return self.run_query("UPDATE transactions SET category=(?) WHERE item_num=(?)",(cat, item_num,))
 
-
     def add_transaction(self,item):
         ''' create a transactions item and add it to the transactions table ~abigailmurphy'''
         return self.run_query("INSERT INTO transactions VALUES(?,?,?,?,?)",(item['item_num'],item['amount'],item['category'],item['date'],item['description']))
@@ -63,7 +62,6 @@ class Transaction:
     def delete_transaction(self,item_num):
         ''' delete a transactions item '~abigailmurphy'''
         return self.run_query("DELETE FROM transactions WHERE item_num=(?)",(item_num,))
-
 
     def run_query(self,query,tuple):
         ''' return all of the uncompleted tasks as a list of dicts. ~abigailmurphy, ariasmithbrandeis'''
@@ -84,5 +82,4 @@ class Transaction:
         con.commit()
         con.close()
         return [cat_to_dict(t) for t in tuples]
-    
     
