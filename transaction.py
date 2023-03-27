@@ -20,7 +20,8 @@ class Transaction:
         '''~abigailmurphy'''
         self.dbase = database
         self.run_query('''CREATE TABLE IF NOT EXISTS transactions
-                    (item_num INT PRIMARY KEY, amount DOUBLE, category TEXT, date DATE, description TEXT)''',() )
+                    (item_num INT PRIMARY KEY, amount DOUBLE, 
+                    category TEXT, date DATE, description TEXT)''',() )
         
 
     def select_all(self):
