@@ -4,8 +4,8 @@
 # abigailmurphy
 
 
-#Pylint on Transaction.py
-\n************* Module transaction
+# Pylint on Transaction.py
+************* Module transaction
 transaction.py:23:0: C0301: Line too long (113/100) (line-too-long)
 transaction.py:32:0: C0303: Trailing whitespace (trailing-whitespace)
 transaction.py:36:0: C0303: Trailing whitespace (trailing-whitespace)
