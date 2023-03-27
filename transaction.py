@@ -31,26 +31,26 @@ class Transaction:
         return self.run_query("SELECT item from transactions",())
     
     def distinct_categories(self):
-        ''' return all distinct categories as a list of dicts.'''
+        ''' return all distinct categories as a list of dicts. ~abigailmurphy'''
         return self.run_cat_query("SELECT DISTINCT category from transactions",())
       
     def by_date(self):
-        ''' return all distinct categories as a list of dicts.'''
+        ''' return all distinct categories as a list of dicts. ~abigailmurphy'''
         return self.run_query('''SELECT item_num, amount, category, date,
                               description FROM transactions group by date ORDER BY date''',())
       
     def by_month(self):
         ''' return all distinct categories as a list of dicts.'''
-        return self.run_query('''SELECT item_num, amount, category, STRFTIME('%m',date) 
-                              AS summarized_by, description FROM transactions 
+        return self.run_query('''SELECT item_num, amount, category, STRFTIME('%m',date) AS summarized_by, description 
+                              FROM transactions 
                               GROUP BY STRFTIME('%m',date)''',())
     
     def by_year(self):
         ''' return all distinct categories as a list of dicts.'''
         return self.run_query('''SELECT item_num, amount, category, date, description 
-                                  FROM transactions 
-                                 GROUP BY STRFTIME('%Y',date) 
-                                 ORDER BY date''',())
+                              FROM transactions 
+                              GROUP BY STRFTIME('%Y',date) 
+                              ORDER BY date''',())
       
     def modify_category(self, old_cat, cat):
         ''' return updated with category added '''
